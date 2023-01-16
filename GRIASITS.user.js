@@ -7,6 +7,7 @@
 // @match        https://trade.rapnet.cn/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        none
+// @license      AGPL-3.0
 // @run-at       context-menu
 
 
