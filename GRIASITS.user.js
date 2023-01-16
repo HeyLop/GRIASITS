@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GRIASITS
 // @namespace    https://trade.rapnet.*/
-// @version      0.2
+// @version      0.2.1
 // @description  GRIASITS(Get  Request Info And Send Info to Server)
 // @author       HeyLop
 // @match        https://trade.rapnet.cn/*
