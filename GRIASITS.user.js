@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         GRIASITS
 // @namespace    https://trade.rapnet.*/
-// @version      0.1.1
+// @version      0.2
 // @description  GRIASITS(Get  Request Info And Send Info to Server)
-// @author       Haoyp
+// @author       Haoyp  
 // @match        https://trade.rapnet.cn/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        none
