@@ -38,12 +38,13 @@ function CreateButton() {
     NewButton.id = 'nbt'
     NewButton.type = 'submit'
     NewButton.className = 'search__footerButton button__callToAction button__callToAction--hollow'
-
+    // NewButton.style.backgroundColor = 
     //将生成的按钮NewButton插入到网页里的ul标签中
     var DefaultDiv = document.querySelector('.flexboxgrid2__center-xs.search__footerRow.flexboxgrid2__row>div')
     var nowtime = HM_Time()
     console.log(`Info||${nowtime}||GRIASITS-Console-log----: + ${DefaultDiv}`)
     DefaultDiv.appendChild(NewButton)
+    
 
     //获取新添加按钮的点击事件
     //NewButton.addEventListener('click', () => {
