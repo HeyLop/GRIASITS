@@ -1,19 +1,18 @@
 // ==UserScript==
-// @name         GRIASITS
+// @name         CatAndNew
 // @namespace    https://trade.rapnet.*/
-// @version      0.2.1
-// @description  GRIASITS(Get  Request Info And Send Info to Server)
+// @version      0.1
+// @description  try to take over the world!
 // @author       HeyLop
 // @match        https://trade.rapnet.cn/*
+// @match        https://trade.rapnet.com/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @license      AGPL-3.0
 // @run-at       context-menu
-// @grant        unsafeWindow
-// @grant        GM_info
-
-
+// @grant        none
 // ==/UserScript==
 
+//context-menu
 
 /**时间获取函数 */
 function HM_Time() {
@@ -27,47 +26,95 @@ function HM_Time() {
     return year + '/' + mon + '/' + day+ '-' + h+ ':' + m+ ':' + s;
 }
 
-function CreateButton() {
-    //给原有搜索按钮增加ID
-    let SearchButton = document.querySelector('.search__footerButton.button__callToAction.button__callToAction--hollow')
-    SearchButton.id = 'sbt'
 
-    //生成按钮NewButton //todo 增加form="advancedSearchFilter"属性
-    var NewButton = document.createElement('button')
-    NewButton.innerText = "搜索并发送"
-    NewButton.id = 'nbt'
-    NewButton.type = 'submit'
-    NewButton.className = 'search__footerButton button__callToAction button__callToAction--hollow'
-    // NewButton.style.backgroundColor = 
-    //将生成的按钮NewButton插入到网页里的ul标签中
-    var DefaultDiv = document.querySelector('.flexboxgrid2__center-xs.search__footerRow.flexboxgrid2__row>div')
-    var nowtime = HM_Time()
-    console.log(`Info||${nowtime}||GRIASITS-Console-log----: + ${DefaultDiv}`)
-    DefaultDiv.appendChild(NewButton)
-    
-
-    //获取新添加按钮的点击事件
-    //NewButton.addEventListener('click', () => {
-    //    fetch('http://api.rapnet.com//api/Search/v2')
-    //        .then(function (response) {
-    //        return response.json();
-    //    })
-    //        .then(function (myJson) {
-    //        console.log(myJson);
-    //    });
-    //})
-
-    //var xhrinfo = window.XMLHttpRequest
-    //console.log(`Info||${yyyy_mm_dd}||XHR-INFO----:' + ${xhrinfo}`)
-}
+(function() {
 
 
-
-(function () {
     'use strict';
-    //插入自定义按钮并给原提交按钮增加ID值
-    CreateButton()
+
+    //生成按钮CatButton
+    var CatButton = document.createElement('button')
+    CatButton.id = "newbut"
+    CatButton.innerText = "已看"
+    CatButton.style.fontSize = '14px';
+    CatButton.style.cursor = "pointer";
+    CatButton.style.backgroundColor='#FFFF00' //蓝色
+
+    //生成按钮NewButton
+    var NewButton = document.createElement('button')
+    NewButton.id = "catbut"
+    NewButton.innerText = "新上"
+    NewButton.style.fontSize = '14px';
+    NewButton.style.cursor = "pointer";
+    NewButton.style.backgroundColor='#70DB93' //碧绿色
+
+    //公共数组，存储当前页面刷新后列表
+    var current_page = []
+
+    document.querySelectorAll('.table-body__StyledTableBody-sc-ziy12y-0.hRLmcu.tableBody .tableRowWrapper').forEach(element => {
+
+        var current_id = element.firstElementChild.firstElementChild.firstElementChild.firstChild.firstElementChild.firstChild.id
+            current_page.push(current_id)
+            console.log(current_page)
+            // var target = document.getElementById(current_id)
+            // target.parentElement.parentElement.parentElement.parentElement.parentElement.classList.add("wasExpanded")
+            var current_input = document.getElementById(current_id)
+            current_input.before(CatButton)
+
+        element.addEventListener('click', (e)=>{
+            e.preventDefault()
+            console.log("点击了")
+            
 
 
+            var id = element.firstElementChild.firstElementChild.firstElementChild.firstChild.firstElementChild.firstChild.id
+            current_page.push(id)
+            console.log(current_page)
+            // var target = document.getElementById(id)
+            // console.log(target.parentNode.parentNode.parentNode.parentNode.parentNode)
+            // console.log(target.parentElement.parentElement.parentElement.parentElement.parentElement)
+            // console.log(target.parentElement.parentElement.parentElement.parentElement.parentElement.classList)
+            // target.parentElement.parentElement.parentElement.parentElement.parentElement.classList.add("wasExpanded-----")
+            // console.log(target.parentElement.parentElement.parentElement.parentElement.parentElement.classList)
+           
 
+            var storage = window.localStorage;
+            var time_now =HM_Time();
+            storage.setItem("fly-read-label", id);//存储
+            storage.setItem("fly-read-time", time_now);//存储
+            console.log(storage.getItem("fly-read-label"));//获取
+            //storage.removeItem("name");//删除单项
+            //storage.clear();//清除所有数据
+            //遍历所有的值localStorage
+            //var localKeys = Object.keys(localStorage)
+            //for (var i=0;i<localKeys.length;i++) {
+            //    console.log(localStorage.getItem(localKeys[i]))
+            //}
+
+        } )
+
+        // console.log(element)
+        // var id = element.firstElementChild.firstElementChild.firstElementChild.firstChild.firstElementChild.firstChild.id
+        // console.log("select-info:"+id)
+        // var idiput1 = document.getElementById(id)
+        // idiput1.before(CatButton)
+        // console.log("add-button"+id)
+
+
+    });
+    /**
+
+    var storage = window.localStorage;
+    var time_now =HM_Time();
+    storage.setItem("fly-read-label", time_now);//存储
+    storage.setItem("fly-read-time", time_now);//存储
+    alert(storage.getItem("fly-read-label"));//获取
+    //storage.removeItem("name");//删除单项
+    //storage.clear();//清除所有数据
+    //遍历所有的值localStorage
+    var localKeys = Object.keys(localStorage)
+    for (var i=0;i<localKeys.length;i++) {
+        console.log(localStorage.getItem(localKeys[i]))
+    }
+    */
 })();
