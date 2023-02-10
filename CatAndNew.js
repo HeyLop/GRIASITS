@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         CatAndNew
 // @namespace    https://trade.rapnet.*/
-// @version      1.0
+// @version      1.1
 // @description  try to take over the world!
 // @author       HeyLop
 // @match        https://trade.rapnet.cn/*
@@ -55,7 +55,7 @@ function HM_Time() {
     //'当前localStorage已使用容量为' + (size / 1024).toFixed(2) + 'KB'
     //如果大于当前容量的80% ，就删掉……的数据
     var localStorageUsed = (size / 1024).toFixed(2);
-    console.log("MSG==========>date:" + HM_Time() + ",当前已用存储:" + localStorageUsed + "KB,浏览器本地存储使用量:" + (localStorageUsed / (1024  * 5)))
+    console.log("MSG==========>date:" + HM_Time() + ",当前已用存储:" + localStorageUsed + "KB,浏览器本地存储使用量:" + (localStorageUsed / (1024 * 5)))
     if ((localStorageUsed / (1024 * 5)) > 0.8) {
         alert("存储使用超过80%，请重置✈️📅数据!!!!!!")
     }
@@ -67,11 +67,14 @@ function HM_Time() {
 
     //将表格title添加空按钮，调整样式与表格结果一致
     var TalbeButton = document.createElement('button')
-    TalbeButton.id = "defbut"
+    TalbeButton.id = "tabelebut"
     TalbeButton.innerText = "✈️"
     TalbeButton.style.fontSize = '14px';
     TalbeButton.style.cursor = "pointer";
-    document.querySelector('.checkbox-header-col__HeaderCheckbox-sc-17l94kc-0.kLQRPN').before(TalbeButton)
+    if(document.getElementById("tabelebut") == null){
+        document.querySelector('.checkbox-header-col__HeaderCheckbox-sc-17l94kc-0.kLQRPN').before(TalbeButton)
+
+    }
 
 
     //页面顶部增加查看浏览器缓存日期与浏览器缓存日期按钮
@@ -84,8 +87,14 @@ function HM_Time() {
     ResetScDateButton.innerText = "重置✈️📅"
     ResetScDateButton.className = 'button__StyledButton-sc-ceuy7i-0 kUAZbV filter-open-button__FilterButton-sc-1l3yltp-0 cdoVHc'
     var page_end = document.querySelector('.button__StyledButton-sc-ceuy7i-0.kUAZbV.filter-open-button__FilterButton-sc-1l3yltp-0.cdoVHc')
-    page_end.after(CatScDateButton)
-    page_end.after(ResetScDateButton)
+    if (document.getElementById("catscdatebutton") == null) {
+        page_end.after(CatScDateButton)
+    }
+    if (document.getElementById("resetscdatebutton") == null) {
+        page_end.after(ResetScDateButton)
+    }
+    
+   
 
     //监听查看日期按钮并添加功能
     CatScDateButton.addEventListener('click', (e) => {
