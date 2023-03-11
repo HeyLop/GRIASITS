@@ -34,7 +34,7 @@ function HM_Time() {
     //公共数组，存储当前页面刷新后列表
     var current_page = []
     var click_id_list = []
-    var readed_id_list = []
+    var readied_id_list = []
 
     //从浏览器本地存储获取已读列表
     var storage = window.localStorage;
@@ -66,13 +66,13 @@ function HM_Time() {
     }
 
     //将表格title添加空按钮，调整样式与表格结果一致
-    var TalbeButton = document.createElement('button')
-    TalbeButton.id = "tabelebut"
-    TalbeButton.innerText = "✈️"
-    TalbeButton.style.fontSize = '14px';
-    TalbeButton.style.cursor = "pointer";
+    var TableButton = document.createElement('button')
+    TableButton.id = "tabelebut"
+    TableButton.innerText = "✈️"
+    TableButton.style.fontSize = '14px';
+    TableButton.style.cursor = "pointer";
     if(document.getElementById("tabelebut") == null){
-        document.querySelector('.checkbox-header-col__HeaderCheckbox-sc-17l94kc-0.kLQRPN').before(TalbeButton)
+        document.querySelector('.checkbox-header-col__HeaderCheckbox-sc-17l94kc-0.kLQRPN').before(TableButton)
 
     }
 
@@ -116,7 +116,7 @@ function HM_Time() {
     })
 
     var readed_id_list_tmp = storage.getItem("fly-read-label")
-    readed_id_list = readed_id_list_tmp.split(',')
+    readied_id_list = readed_id_list_tmp.split(',')
 
     //底部增加按钮处理设置过期时间与清除浏览器缓存
 
@@ -141,7 +141,7 @@ function HM_Time() {
         // console.log("==========>" + defaultid)
         //处理已读，并在页面中进行标记
         //判断当前页面到每条数据是否倍点击过
-        if (readed_id_list.includes(current_id)) {
+        if (readied_id_list.includes(current_id)) {
             target.before(CatButton)
         } else {
             //生成按钮DefaultButton（字体，背景均为透明色） 用于填补没被点击到列前，统一页面格式
@@ -160,7 +160,7 @@ function HM_Time() {
         element.addEventListener('click', (e) => {
             e.preventDefault()
             // console.log("点击了!!!")
-            click_id_list = readed_id_list
+            click_id_list = readied_id_list
             if (document.getElementById(defaultid) != null) {
                 document.getElementById(defaultid).remove()
             }
