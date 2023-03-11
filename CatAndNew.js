@@ -71,33 +71,33 @@ function HM_Time() {
     TableButton.innerText = "✈️"
     TableButton.style.fontSize = '14px';
     TableButton.style.cursor = "pointer";
-    if(document.getElementById("tabelebut") == null){
+    if (document.getElementById("tabelebut") == null) {
         document.querySelector('.checkbox-header-col__HeaderCheckbox-sc-17l94kc-0.kLQRPN').before(TableButton)
 
     }
 
 
     //页面顶部增加查看浏览器缓存日期与浏览器缓存日期按钮
-    var CatScDateButton = document.createElement('button')
-    CatScDateButton.id = "catscdatebutton"
-    CatScDateButton.innerText = "查看✈️📅"
-    CatScDateButton.className = 'button__StyledButton-sc-ceuy7i-0 kUAZbV filter-open-button__FilterButton-sc-1l3yltp-0 cdoVHc'
-    var ResetScDateButton = document.createElement('button')
-    ResetScDateButton.id = "resetscdatebutton"
-    ResetScDateButton.innerText = "重置✈️📅"
-    ResetScDateButton.className = 'button__StyledButton-sc-ceuy7i-0 kUAZbV filter-open-button__FilterButton-sc-1l3yltp-0 cdoVHc'
+    var CatDateID = document.createElement('button')
+    CatDateID.id = "CatDateID"
+    CatDateID.innerText = "查看✈️📅"
+    CatDateID.className = 'button__StyledButton-sc-ceuy7i-0 kUAZbV filter-open-button__FilterButton-sc-1l3yltp-0 cdoVHc'
+    var RestDateButton = document.createElement('button')
+    RestDateButton.id = "RestDateButton"
+    RestDateButton.innerText = "重置✈️📅"
+    RestDateButton.className = 'button__StyledButton-sc-ceuy7i-0 kUAZbV filter-open-button__FilterButton-sc-1l3yltp-0 cdoVHc'
     var page_end = document.querySelector('.button__StyledButton-sc-ceuy7i-0.kUAZbV.filter-open-button__FilterButton-sc-1l3yltp-0.cdoVHc')
-    if (document.getElementById("catscdatebutton") == null) {
-        page_end.after(CatScDateButton)
+    if (document.getElementById("CatDateID") == null) {
+        page_end.after(CatDateID)
     }
-    if (document.getElementById("resetscdatebutton") == null) {
-        page_end.after(ResetScDateButton)
+    if (document.getElementById("RestDateButton") == null) {
+        page_end.after(RestDateButton)
     }
-    
-   
+
+
 
     //监听查看日期按钮并添加功能
-    CatScDateButton.addEventListener('click', (e) => {
+    CatDateID.addEventListener('click', (e) => {
         if (storage.getItem("fly-read-time").length < 4) {
             alert("最后保存数据日期✈️📅为空，暂无数据!!! \n==========>MSG浏览器存储使用情况<===========\n当前时间:" + HM_Time() + "\n当前已用存储:" + localStorageUsed + "KB\n存储使用百分比:" + (localStorageUsed / (1024 * 5) * 100 + "%") + "\n⚠️警告：存储使用百分比超过80%告警提示!!!\n⚠️警告：存储使用百分比超过90%将自动清除数据!!!")
         } else {
@@ -105,7 +105,7 @@ function HM_Time() {
         }
     })
     //监听重置日期按钮并添加功能
-    ResetScDateButton.addEventListener('click', (e) => {
+    RestDateButton.addEventListener('click', (e) => {
         storage.setItem("fly-read-time", "");
         storage.setItem("fly-read-label", "");
         if (storage.getItem("fly-read-time").length < 4) {
@@ -115,8 +115,8 @@ function HM_Time() {
         }
     })
 
-    var readed_id_list_tmp = storage.getItem("fly-read-label")
-    readied_id_list = readed_id_list_tmp.split(',')
+    var reade_id_list_tmp = storage.getItem("fly-read-label")
+    readied_id_list = reade_id_list_tmp.split(',')
 
     //底部增加按钮处理设置过期时间与清除浏览器缓存
 
@@ -126,7 +126,7 @@ function HM_Time() {
 
         //生成按钮CatButton 可能是js的bug 必须将按钮放置到函数内才可生效，否则只能最后一次循环生效
         var CatButton = document.createElement('button')
-        CatButton.id = "newbut"
+        CatButton.id = "NewButton"
         CatButton.innerText = "看"
         CatButton.style.fontSize = '14px';
         CatButton.style.cursor = "pointer";
@@ -135,18 +135,18 @@ function HM_Time() {
 
 
         //公共参数声明
-        var current_id = element.firstElementChild.firstElementChild.firstElementChild.firstChild.firstElementChild.firstChild.id
-        var defaultid = "defbut" + current_id
-        var target = document.getElementById(current_id)
-        // console.log("==========>" + defaultid)
+        var CurrentId = element.firstElementChild.firstElementChild.firstElementChild.firstChild.firstElementChild.firstChild.id
+        var DefaultId = "DefaultButton" + CurrentId
+        var target = document.getElementById(CurrentId)
+        // console.log("==========>" + DefaultId)
         //处理已读，并在页面中进行标记
         //判断当前页面到每条数据是否倍点击过
-        if (readied_id_list.includes(current_id)) {
+        if (readied_id_list.includes(CurrentId)) {
             target.before(CatButton)
         } else {
             //生成按钮DefaultButton（字体，背景均为透明色） 用于填补没被点击到列前，统一页面格式
             var DefaultButton = document.createElement('button')
-            DefaultButton.id = defaultid
+            DefaultButton.id = DefaultId
             DefaultButton.innerText = "空"
             DefaultButton.style.fontSize = '14px';
             DefaultButton.style.cursor = "pointer";
@@ -161,11 +161,11 @@ function HM_Time() {
             e.preventDefault()
             // console.log("点击了!!!")
             click_id_list = readied_id_list
-            if (document.getElementById(defaultid) != null) {
-                document.getElementById(defaultid).remove()
+            if (document.getElementById(DefaultId) != null) {
+                document.getElementById(DefaultId).remove()
             }
             target.before(CatButton)
-            click_id_list.push(current_id)
+            click_id_list.push(CurrentId)
             storage.setItem("fly-read-label", click_id_list);//存储
             if (storage.getItem("fly-read-time").length < 4) {
                 storage.setItem("fly-read-time", HM_Time());//存储
